@@ -1,0 +1,63 @@
+{% extends "header.html" %}
+{% include "account/base.html" %}
+
+<html>
+<head>
+    {% block css %}
+        {% load static %}
+        <link href="{% static "myaccount.css" %}" rel="stylesheet" type="text/css"/>
+    {% endblock %}
+</head>
+
+<body>
+    {% block title %}<title>My Account</title>{% endblock %}
+    {% block head %}<h1>Hot Ramen Books</h1>{% endblock %}
+
+    {% block content %}
+
+    <div class="headers_bg">
+        <div class="headers">
+            <div class="col_title"><h2>Bookshelf Title</h2></div>
+            <div class="col_access"><h2>Access Type</h2></div>
+            <div class="col_count"><h2>Book Count</h2></div>
+            <div class="col_id"><h2>View Books</h2></div>
+        </div>
+    </div>
+
+    <div class="parent">
+        {% for kind in bookshelf_json.items %}
+            <div class="child_title">
+                <p>{{ kind.title }}</p>
+            </div>
+
+            <div class="child_access">
+                <p>({{ kind.access }})</p>
+            </div>
+
+            <div class="child_count">
+                {% if kind.volumeCount %}
+                    <p>{{ kind.volumeCount }}</p>
+                {% else %}
+                    <p>0</p>
+                {% endif %}
+            </div>
+
+            <div class="child_id">
+                <br>
+                {% if kind.volumeCount %}
+                    <form action="/bookshelf_volumes" method="get">
+                        <input type="hidden" name="bookshelf_id" value="{{ kind.id }}">
+                        <input type="submit" value="View Bookshelf">
+                    </form>
+                {% else %}
+                    <p>Bookshelf Empty</p>
+                {% endif %}
+            </div>
+
+            <div class="between"></div>
+        {% endfor %}
+    </div>
+
+    {% endblock %}
+</body>
+</html>

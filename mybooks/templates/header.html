@@ -1,0 +1,52 @@
+{% block header %}{% endblock %}
+<html>
+<head>
+    {% load static %}
+    <link href="{% static "header.css" %}" rel="stylesheet" type="text/css"/>
+    {% block css %}{% endblock %}
+</head>
+
+<body>
+    <div class="header">
+        <div class="header_text">
+            {% block title %}{% endblock %}
+            {% block head %}{% endblock %}
+        </div>
+
+        <div class="header_account">
+            {% if user.socialaccount_set.all.0.extra_data.name %}
+            <p class="header">Welcome, {{ user.socialaccount_set.all.0.extra_data.name }}!</p>
+            <a href="/accounts/logout">
+                <input type="button" value="Logout"/>
+            </a>
+            {% else %}
+            <p class="header">Welcome, Guest!</p>
+            <a href="/accounts/login">
+                <input type="button" value="Login"/>
+            </a>
+            {% endif %}
+        </div>
+
+        <div class="header_buttons">
+            <a href="/home_page">
+                <input type="button" value="Home Page"/>
+            </a>
+            
+            <a href="/search_simple">
+                <input type="button" value="Simple Search"/>
+            </a>
+
+            <a href="/search_form">
+                <input type="button" value="Advanced Search"/>
+            </a>
+
+            {% if user.socialaccount_set.all.0.extra_data.name %}
+                <a href="/my_account">
+                    <input type="button" value="My Account"/>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+{% block content %}{% endblock %}
+</html>

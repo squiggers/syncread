@@ -1,0 +1,30 @@
+{% extends "header.html" %}
+
+{% load i18n %}
+
+<head>
+	{% block head_title %}{% trans "Sign Out" %}{% endblock %}
+	{% block css %}
+    	{% load static %}
+    	<link href="{% static "logout.css" %}" rel="stylesheet" type="text/css"/>
+	{% endblock %}
+</head>
+
+<body>
+	{% block title %}<title>Simple Book Search</title>{% endblock %}
+	{% block head %}<h1>Hot Ramen Books</h1>{% endblock %}
+
+	{% block content %}
+		<div class="body">
+			<p class="text">{% trans 'Are you sure you want to sign out?' %}</p>
+			<br><br>
+			<form method="post" action="{% url 'account_logout' %}?next=/home_page">
+				{% csrf_token %}
+				{% if redirect_field_value %}
+				<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+				{% endif %}
+				<button type="submit">{% trans 'Sign Out' %}</button>
+			</form>
+		</div>
+	{% endblock %}
+</body>

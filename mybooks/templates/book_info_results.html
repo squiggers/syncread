@@ -1,0 +1,89 @@
+{% extends "header.html" %}
+
+<html>
+<head>
+	{% block css %}
+	{% load static %}
+	<link href="{% static "bookinforesults.css" %}" rel="stylesheet" type="text/css"/>
+	{% endblock %}
+</head>
+
+<body>
+	{% block title %}<title>{{ parsed_json.volumeInfo.title }}</title>{% endblock %}
+	{% block head %}<h1>Hot Ramen Books</h1>{% endblock %}
+
+	{% block content %}
+	<h2>{{ parsed_json.volumeInfo.title }}<br>{{ parsed_json.volumeInfo.subtitle }}</h2>
+	{{ post_url }}
+	<div class="image">
+		<img src="{{ parsed_json.volumeInfo.imageLinks.thumbnail }}">
+		<br><br>
+		{% if user.socialaccount_set.all.0.extra_data.name %}
+		<form action="/book_info" method="get">
+			<span class="custom-dropdown">
+				<select name="bookshelf_id">
+					{% for kind in bookshelf_json.items %}
+						<option value="{{ kind.id }}">{{ kind.title }}</option>
+					{% endfor %}
+				</select>
+			</span>
+			<br><br>
+			<span class="custom-dropdown">
+				<select name="action_type">
+					<option value="add">Add to Bookshelf</option>
+					<option value="remove">Remove from Bookshelf</option>
+				</select>
+			</span>
+			<br><br>
+			<input type="hidden" name="book_info" value="{{ parsed_json.id }}">
+			<input type="submit" value="Submit">
+		</form>
+		<p class="added">{% for m in message %}{{ m }}{% endfor %}</p>
+		{% endif %}
+	</div>
+
+	<div class="text">
+		{% if parsed_json.volumeInfo.title %}
+			<h3>Title:</h3>
+				<p>{{ parsed_json.volumeInfo.title }}
+					{{ parsed_json.volumeInfo.subtitle }}</p>
+			<br><br><br>
+		{% endif %}
+
+		{% if parsed_json.volumeInfo.authors %}
+			<h3>Author(s):</h3>
+				<p>{{ parsed_json.volumeInfo.authors|join:"<br>" }}</p>
+			<br><br><br>
+		{% endif %}
+
+		{% if parsed_json.volumeInfo.categories %}
+			<h3>Genre(s):</h3>
+				<p>{{ parsed_json.volumeInfo.categories|join:"<br>" }}</p>
+			<br><br><br>
+		{% endif %}
+
+		{% if parsed_json.volumeInfo.pageCount %}
+			<h3>Page Count:</h3>
+				<p>{{ parsed_json.volumeInfo.pageCount }}</p>
+			<br><br><br>
+		{% endif %}
+
+		{% if parsed_json.volumeInfo.averageRating %}
+			<h3>Average Rating:</h3>
+				<p>{{ parsed_json.volumeInfo.averageRating }}</p>
+			<br><br><br>
+		{% endif %}
+	</div>
+
+
+	<div class="description">
+		{% if parsed_json.volumeInfo.description %}
+			<br><br><br>
+			<h3>Description:</h3>
+				<p>{{ parsed_json.volumeInfo.description|safe }}</p>
+		{% endif %}
+	</div>
+
+</body>
+{% endblock %}
+</html>

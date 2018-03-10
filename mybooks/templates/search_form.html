@@ -1,0 +1,125 @@
+{% extends "header.html" %}
+
+<html>
+<head>
+	{% block css %}
+	{% load static %}
+	<link href="{% static "searchform.css" %}" rel="stylesheet" type="text/css"/>
+	{% endblock %}
+</head>
+
+<body>
+	{% block title %}<title>Advanced Book Search</title>{% endblock %}
+	{% block head %}<h1>Hot Ramen Books</h1>{% endblock %}
+
+	{% block content %}
+	<div class="form_search">
+		<div class="form_background">
+			<font class="errors">{{ errors|join:"<br>" }}</font>
+
+			<form action="/search_results" method="get">
+				<h2>Advanced Search</h2>
+				<h3><u>Keyword Search</u></h3>
+
+				<h4>Title:</h4>
+				<input type='text' name='title_search' size="50%">
+				<br>
+
+				<h4>Author:</h4>
+				<input type='text' name='author_search' size="50%">
+				<br>
+
+				<h4>Genre:</h4>
+				<input type='text' name='genre_search' size="50%">
+				<br>
+
+<!--	ISBN search not working - per google			
+				<h4>ISBN:</h4>
+				<input type='text' name='isbn_search' size="50%">
+				<br><br>
+-->
+
+				<h3><u>Filter Options</u></h3>
+
+				<h4>Sort By:</h4>
+				<span class="full">
+					<label class="container">No Filter
+						<input type="radio" name="filter" value="" checked="checked">
+						<span class="checkmark"></span>
+					</label>
+					<label class="container">All b-books
+						<input type="radio" name="filter" value="ebooks">
+						<span class="checkmark"></span>
+					</label>
+					<label class="container">Free e-books
+						<input type="radio" name="filter" value="free-ebooks">
+						<span class="checkmark"></span>
+					</label>
+					<label class="container">Paid e-books
+						<input type="radio" name="filter" value="paid-ebooks">
+						<span class="checkmark"></span>
+					</label>
+					<label class="container">Free Public Books
+						<input type="radio" name="filter" value="full">
+						<span class="checkmark"></span>
+					</label>
+				</span>
+				<br>
+
+				<h4>Print Type:</h4>
+				<span class="full">
+						<label class="container">No Filter
+							<input type="radio" name="printType" value="" checked="checked">
+							<span class="checkmark"></span>
+						</label>
+						<label class="container">All Print Types
+							<input type="radio" name="printType" value="all">
+							<span class="checkmark"></span>
+						</label>
+						<label class="container">Books
+							<input type="radio" name="printType" value="books">
+							<span class="checkmark"></span>
+						</label>
+						<label class="container">Magazines
+							<input type="radio" name="printType" value="magazines">
+							<span class="checkmark"></span>
+						</label>
+					</span>
+					<br>
+
+					<h4>Book Type:</h4>
+					<span class="full">
+						<label class="container">No Filter
+							<input type="radio" name="orderBy" value="" checked="checked">
+							<span class="checkmark"></span>
+						</label>
+						<label class="container">Newest
+							<input type="radio" name="orderBy" value="newest">
+							<span class="checkmark"></span>
+						</label>
+						<label class="container">Relevance
+							<input type="radio" name="orderBy" value="relevance">
+							<span class="checkmark"></span>
+						</label>
+					</span>
+					<br>
+
+					<div class="drop">
+						<h4>Book Type:</h4>
+						<span class="custom-dropdown">
+							<select name="maxResults">
+								<option value="10">Top 10 Results</option>
+								<option value="20">Top 20 Results</option>
+								<option value="30">Top 30 Results</option>
+								<option value="40">Top 40 Results</option>
+							</select>
+						</span>
+					</div>
+
+				<input type="submit" value="Search">
+			</form>
+		</div>
+	</div>
+</body>
+{% endblock %}
+</html>

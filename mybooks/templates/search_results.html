@@ -1,0 +1,68 @@
+{% extends "header.html" %}
+
+<html>
+<head>
+    {% block css %}
+	{% load static %}
+	<link href="{% static "searchresults.css" %}" rel="stylesheet" type="text/css"/>
+	{% endblock %}
+<head>
+
+<body>
+	{% block title %}<title>Search Results</title>{% endblock %}
+	{% block head %}<h1>Hot Ramen Books</h1>{% endblock %}
+
+{% block content %}
+	<div class="columns_bg">
+		<div class="columns">
+			<div class="col_image"><h2>Cover Image</h2></div>
+			<div class="col_title"><h2>Title</h2></div>
+			<div class="col_author"><h2>Author</h2></div>
+			<div class="col_publish"><h2>Publisher<br>Publish Date</h2></div>
+			<div class="col_genre"><h2>Genre</h2></div>
+		</div>
+	</div>
+
+	<div class="parent">
+		{% for kind in parsed_json.items %}
+			<div class="child_image">
+				<p><img src="{{ kind.volumeInfo.imageLinks.thumbnail }}"></p>
+			</div>
+
+			<div class="child_title">
+				<p>{{ kind.volumeInfo.title }}<br><br>
+					{% if kind.volumeInfo.subtitle %}
+						<p class="sub">{{ kind.volumeInfo.subtitle }}</p><br><br>
+					{% endif %}</p>
+
+				<form action="/book_info" method="get">
+					<input type="hidden" name="book_info" value="{{ kind.id }}">
+					<input type="submit" value="More Info">
+				</form>
+			</div>
+
+			<div class="child_author">
+				<p>{{ kind.volumeInfo.authors|join:"<br>" }}</p>
+			</div>
+
+			<div class="child_publish">
+				<p>
+					{% if kind.volumeInfo.publisher %}
+						{{ kind.volumeInfo.publisher }}<br><br><p class="sub">{{ kind.volumeInfo.publishedDate }}</p>
+					{% else %}
+						{{ kind.volumeInfo.publishedDate }}
+					{% endif %}
+				</p>
+			</div>
+
+			<div class="child_genre">
+				<p>{{ kind.volumeInfo.categories|join:"<br><br>" }}</p>
+			</div>
+
+			<div class="between"></div>
+		{% endfor %}
+	</div>
+	
+{% endblock %}
+</body>
+</html>

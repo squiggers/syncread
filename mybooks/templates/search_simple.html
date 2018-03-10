@@ -1,0 +1,33 @@
+{% extends "header.html" %}
+{% include "account/base.html" %}
+
+<html>
+<head>
+    {% block css %}
+        {% load static %}
+        <link href="{% static "searchsimple.css" %}" rel="stylesheet" type="text/css"/>
+    {% endblock %}
+</head>
+
+<body>
+    {% block title %}<title>Simple Book Search</title>{% endblock %}
+    {% block head %}<h1>Hot Ramen Books</h1>{% endblock %}
+
+    {% block content %}
+    <div class="simple_search">
+        <div class="simple_background">
+            <font class="errors">{{ errors|join:"<br>" }}</font>
+            
+                <h2>Simple Search</h2>
+                <h3>Search by Keyword:</h3>
+            <form action="/search_results" method="get">
+                <input type='text' name='query' size="50%">
+                <br><br>
+                <input type="submit" value="Search">
+            </form> 
+        </div>
+    </div>
+    {% endblock %}
+
+</body>
+</html>
