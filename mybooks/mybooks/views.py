@@ -20,6 +20,7 @@ def search(request):
     if request.GET:
         url = ('https://www.googleapis.com/books/v1/volumes?q=')
 
+        # simple search getting results
         if 'query' in request.GET:
             if not request.GET['query']:
                 errors.append('Please enter a search term')
@@ -36,6 +37,7 @@ def search(request):
             else:
                 return render(request, 'search_simple.html', {'errors': errors})
         
+        # search form getting results
         else:
             if not request.GET['title_search'] and not request.GET['author_search'] and not request.GET['genre_search'] and not request.GET['isbn_search']:
                 errors.append('Must enter at least one keyword')
@@ -93,6 +95,7 @@ def book_info(request):
         user = request.user
         access_token = str(SocialToken.objects.get(account__user=request.user, account__provider='google'))
 
+        # allows bookshelf changes if authenticated
         if 'bookshelf_id' in request.GET:
             bookshelf_id = request.GET['bookshelf_id']
             if 'add' in request.GET['action_type']:
@@ -108,6 +111,7 @@ def book_info(request):
                 response = requests.request('POST', post_url, headers=headers, params=querystring)
                 message.append('Book Successfully Removed!')
 
+        # gets bookshelf list if authenticated
         bookshelf_list = 'https://www.googleapis.com/books/v1/mylibrary/bookshelves?access_token=' + str(access_token)
         with urllib.request.urlopen(bookshelf_list) as url:
             bookshelf_json = json.loads(url.read().decode())
@@ -125,6 +129,7 @@ def my_account(request):
     user = request.user
     access_token = str(SocialToken.objects.get(account__user=request.user, account__provider='google')) 
 
+    # gets bookhelf list if authenticated
     bookshelf_list = 'https://www.googleapis.com/books/v1/mylibrary/bookshelves?access_token=' + str(access_token)
     with urllib.request.urlopen(bookshelf_list) as url:
         bookshelf_json = json.loads(url.read().decode())
@@ -137,6 +142,7 @@ def my_account(request):
     return render(request, 'my_account.html', {'bookshelf_json': bookshelf_json})
 
 def bookshelf_volumes(request):
+    # hard-coded test value - needs to be collected automatically in production
     userid = '108000171824739586692'
     shelf = request.GET['bookshelf_id']
     url = 'https://www.googleapis.com/books/v1/users/' + userid + '/bookshelves/' + shelf + '/volumes'
