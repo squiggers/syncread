@@ -104,6 +104,7 @@ SOCIALACCOUNT_PROVIDERS = {
         ],
         'AUTH_PARAMS': {
             'access_type': 'offline',
+            'include_granted_scopes': 'true'
         }
     }
 }

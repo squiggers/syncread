@@ -142,10 +142,11 @@ def my_account(request):
     return render(request, 'my_account.html', {'bookshelf_json': bookshelf_json})
 
 def bookshelf_volumes(request):
-    # hard-coded test value - needs to be collected automatically in production
-    userid = '108000171824739586692'
-    shelf = request.GET['bookshelf_id']
+    user = request.user
+    #need to find this instead of hard code it in production
+    userid  = '108000171824739586692'
+    shelf = str(request.GET['bookshelf_id'])
     url = 'https://www.googleapis.com/books/v1/users/' + userid + '/bookshelves/' + shelf + '/volumes'
-    with urllib.request.urlopen(url) as url:
-        parsed_json = json.loads(url.read().decode())
+    with urllib.request.urlopen(url) as response:
+        parsed_json = json.loads(response.read().decode())
     return render(request, 'search_results.html', {'parsed_json': parsed_json})

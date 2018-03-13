@@ -48,6 +48,7 @@ div.header_buttons {
     text-align: center;
 }
 
+
 input[type=button] {
     background-color: #f8fafa;
     border: solid;
@@ -58,6 +59,17 @@ input[type=button] {
     font-size: 13px;
     cursor: pointer;
 }
+
+/*
+input[type=button] {
+    border: none;
+    color: black;
+    background-color: #3C738E;
+    padding: 8px 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+*/
 
 a {
     padding-left: 10px;
