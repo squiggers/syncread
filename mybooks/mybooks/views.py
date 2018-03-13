@@ -142,11 +142,7 @@ def my_account(request):
     return render(request, 'my_account.html', {'bookshelf_json': bookshelf_json})
 
 def bookshelf_volumes(request):
-    user = request.user
-    #need to find this instead of hard code it in production
-    userid  = '108000171824739586692'
-    shelf = str(request.GET['bookshelf_id'])
-    url = 'https://www.googleapis.com/books/v1/users/' + userid + '/bookshelves/' + shelf + '/volumes'
+    url = request.GET['self_link']
     with urllib.request.urlopen(url) as response:
         parsed_json = json.loads(response.read().decode())
     return render(request, 'search_results.html', {'parsed_json': parsed_json})

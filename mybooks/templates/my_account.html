@@ -47,6 +47,7 @@
                 {% if kind.volumeCount %}
                     <form action="/bookshelf_volumes" method="get">
                         <input type="hidden" name="bookshelf_id" value="{{ kind.id }}">
+                        <input type="hidden" name="self_link" vlaue="{{ kind.selfLink }}">
                         <input type="submit" value="View Bookshelf">
                     </form>
                 {% else %}
