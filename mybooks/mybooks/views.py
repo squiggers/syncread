@@ -142,7 +142,12 @@ def my_account(request):
     return render(request, 'my_account.html', {'bookshelf_json': bookshelf_json})
 
 def bookshelf_volumes(request):
-    url = request.GET['self_link']
+    url = request.GET['self_link'] + '/volumes'
     with urllib.request.urlopen(url) as response:
         parsed_json = json.loads(response.read().decode())
     return render(request, 'search_results.html', {'parsed_json': parsed_json})
+
+#def get_access_token(request):
+    #user = request.user
+    #account = user.socialaccount_set.get(provider="google")
+    #refresh_token = account.socialtoken_set.first().token_secret
