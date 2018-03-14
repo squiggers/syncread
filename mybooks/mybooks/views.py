@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from allauth.socialaccount.models import SocialLogin, SocialToken, SocialApp, SocialAccount
 from allauth.socialaccount.forms import DisconnectForm
+from requests_oauthlib import OAuth2Session
 import requests
 import urllib.request
 import json
@@ -88,6 +89,7 @@ def search(request):
     return render(request, 'search_form.html', {'errors': errors})
 
 def book_info(request):
+    #error_401(self)
     bookshelf_json = ''
     message = []
     book_info = request.GET['book_info']
@@ -126,6 +128,7 @@ def book_info(request):
     return render(request, 'book_info_results.html', {'parsed_json': parsed_json, 'bookshelf_json': bookshelf_json, 'message': message})
 
 def my_account(request):
+    #error_401(self)
     user = request.user
     access_token = str(SocialToken.objects.get(account__user=request.user, account__provider='google')) 
 
@@ -142,12 +145,22 @@ def my_account(request):
     return render(request, 'my_account.html', {'bookshelf_json': bookshelf_json})
 
 def bookshelf_volumes(request):
+    #error_401(self)
     url = request.GET['self_link'] + '/volumes'
     with urllib.request.urlopen(url) as response:
         parsed_json = json.loads(response.read().decode())
     return render(request, 'search_results.html', {'parsed_json': parsed_json})
 
-#def get_access_token(request):
     #user = request.user
     #account = user.socialaccount_set.get(provider="google")
     #refresh_token = account.socialtoken_set.first().token_secret
+
+def error_401(self):
+    try:
+        response = failure.value.response
+    except:
+        pass
+    else:
+        if response.status == 401:
+            self.token_refresh(failure.request)
+    self.log(failure.value, level=log.ERROR)
