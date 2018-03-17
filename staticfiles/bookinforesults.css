@@ -1,0 +1,134 @@
+body {
+    width: 100%;
+}
+
+div.image {
+    position: relative;
+    top: 50px;
+    min-width: 25%;
+    max-width: 25%;
+    float: right;
+    margin-right: 25%;
+    text-align: right;
+    display: inline-block;
+}
+
+div.text {
+    position: relative;
+    top: 50px;
+    min-width: 25%;
+    max-width: 25%;
+    float: left;
+    margin-left: 25%;
+}
+
+div.description {
+    position: relative;
+    min-width: 50%;
+    max-width: 50%;
+    float: left;
+    margin-left: 25%;
+}
+
+h2 {
+    font-weight: 1;
+    text-align: center;
+    color: #f8fafa;
+    font-size: 30px;
+}
+
+h3 {
+    color: #f8fafa;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    font-size: 20px;
+    font-weight: 1;
+    color: #f8fafa;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+p.added {
+    font-size: 15px;
+    color: #3C738E;
+}
+
+select {
+    position: absolute;
+    width: 200px;
+    line-height: 2;
+    left: 35px;
+}
+
+.custom-dropdown {
+    position: absolute;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0; /* demo only */
+    left: 25%;
+}
+  
+.custom-dropdown select {
+    background-color: #f8fafa;
+    color: black;
+    font-size: 15px;
+    padding-left: 10px;
+    border: 0;
+    border-radius: 0;
+    -webkit-appearance: button; /* hide default arrow in chrome OSX */
+    outline: 0;
+}
+
+.custom-dropdown::before,
+.custom-dropdown::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    left: 215px;
+    top: 12px;
+}
+
+.custom-dropdown::after { /*  Custom dropdown arrow */
+  content: "\25BC";
+  height: 1em;
+  font-size: .625em;
+  line-height: 1;
+  right: 50%;
+}
+
+.custom-dropdown::before { /*  Custom dropdown arrow cover */
+  width: 2em;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 0 3px 3px 0;
+}
+
+.custom-dropdown::before {
+  background-color: black;
+}
+
+.custom-dropdown::after {
+  color: black;
+}
+
+div.drop {
+    line-height: 2;
+}
+
+input[type=submit] {
+    background-color: #f8fafa;
+    border: solid;
+    border-color: #384044;
+    color: black;
+    padding: 8px 10px;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 5px;
+}
