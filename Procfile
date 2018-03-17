@@ -1,1 +1,1 @@
-web: gunicorn easybank.wsgi
+web: gunicorn mybooks.wsgi
