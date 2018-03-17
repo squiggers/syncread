@@ -1,0 +1,87 @@
+/* Color Pallette */
+/* Blue BG #3C738E */
+/* Comp #C55233 */
+/* D Gray #384044 */
+/* L Gray #f8fafa */
+
+body {
+    position: absolute;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #384044;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    top: 25%;
+}
+
+div.header {
+    position: fixed;
+    width: 100%;
+    background-color: #3C738E;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    z-index: 2;
+    top: 0;
+    border-bottom: 10px solid #C55233;
+}
+
+div.header_text {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+}
+
+div.header_text h1 {
+    font-weight: 100;
+}
+
+div.header_account {
+    position: absolute;
+    right: 25px;
+    margin: 0 auto;
+    text-align: right;
+}
+
+div.header_buttons {
+    margin: 0 auto;
+    width: 700px;
+    text-align: center;
+}
+
+
+input[type=button] {
+    background-color: #f8fafa;
+    border: solid;
+    border-color: #384044;
+    border-radius: 5px;
+    color: black;
+    padding: 8px 10px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/*
+input[type=button] {
+    border: none;
+    color: black;
+    background-color: #3C738E;
+    padding: 8px 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+*/
+
+a {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-decoration: none;
+}
+
+p.header {
+    position: relative;
+    display: inline;
+    margin: 0;
+    top: 3px;
+    font-size: 20px;
+    color: black;
+}

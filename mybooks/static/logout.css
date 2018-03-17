@@ -1,0 +1,26 @@
+body {
+    width: 100%;
+}
+
+div.body {
+    width: 30%;
+    margin: 0 auto;
+}
+
+p.text {
+    color: #f8fafa;
+    line-height: 2;
+}
+
+button[type=submit] {
+    background-color: #f8fafa;
+    border: solid;
+    border-color: #C55233;
+    color: black;
+    padding: 8px 10px;
+    font-size: 13px;
+    cursor: pointer;
+    padding-right: 30px;
+    padding-left: 30px;
+    border-radius: 5px;
+}
