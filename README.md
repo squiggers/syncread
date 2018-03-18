@@ -6,5 +6,5 @@ A project combining both the Google Books and Goodreads accounts, so a user can 
 
 Current features include a simple search, advanced search, and authentication with Google Books which will allow access to view bookshelves as well as add and remove books from them.
 
-#Live Demo
+# Live Demo
 https://syncread.herokuapp.com
