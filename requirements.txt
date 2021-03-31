@@ -16,7 +16,7 @@ gunicorn==19.7.1
 hyperlink==18.0.0
 idna==2.6
 incremental==17.5.0
-lxml==4.2.0
+lxml==4.6.3
 oauthlib==2.0.6
 parsel==1.4.0
 pipenv==11.3.2
